@@ -5,7 +5,7 @@ from math import pi
 # Initialize the game engine
 pygame.init()
  
-x = 40
+x = 45
 # Define the colors we will use in RGB format
 BLACK = (  0,   0,   0)
 WHITE = (255, 255, 255)
