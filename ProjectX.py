@@ -31,22 +31,53 @@ flLeft = flRight = False
 
 #Цикл
 
+flStartDraw = False
+sp = ep = None
+sc.fill(WHITE)
+pg.display.update()
+
+
 flRunning = True
 while flRunning:
 	for event in pg.event.get():
 		if event.type == pg.QUIT:
 			pg.quit()
 			flRunning = False
+			
+		elif event.type == pg.MOUSEBUTTONDOWN and event.button == 1:
+			flStartDraw = True
+			sp = event.pos
+		elif event.type == pg.MOUSEMOTION:
+			if flStartDraw:
+				pos = event.pos
 
-		elif event.type == pg.KEYDOWN:
-			if event.key == pg.K_LEFT and event.mod == pg.KMOD_LCTRL:
-				move = -speed
-			elif event.key == pg.K_RIGHT and event.mod == pg.KMOD_LCTRL:
-				move = speed
-		elif event.type == pg.KEYUP:
-			if event.key in [pg.K_LEFT, pg.K_RIGHT]:
-				move = 0
-	x += move
+				width = pos[0] - sp[0]
+				height = pos[1] - sp[1]
+
+				sc.fill(WHITE)
+				pg.draw.rect(sc, RED, (sp[0],sp[1], width, height))
+				pg.display.update()
+		elif event.type == pg.MOUSEBUTTONUP and event.button == 1:
+			flStartDraw = False
+
+
+
+
+
+
+
+
+
+#считывание клавиш с CTRL
+	# 	elif event.type == pg.KEYDOWN:
+	# 		if event.key == pg.K_LEFT and event.mod == pg.KMOD_LCTRL:
+	# 			move = -speed
+	# 		elif event.key == pg.K_RIGHT and event.mod == pg.KMOD_LCTRL:
+	# 			move = speed
+	# 	elif event.type == pg.KEYUP:
+	# 		if event.key in [pg.K_LEFT, pg.K_RIGHT]:
+	# 			move = 0
+	# x += move
 
 #Считывание клавиш
 	# keys = pg.key.get_pressed()
@@ -56,9 +87,11 @@ while flRunning:
 	# elif keys[pg.K_RIGHT]:
 	# 	x += speed
 
-	sc.fill(WHITE)
-	pg.draw.rect(sc, BLUE, (x, y, 10, 20))
-	pg.display.update()
+
+#Отрисовка
+	# sc.fill(WHITE)
+	# pg.draw.rect(sc, BLUE, (x, y, 10, 20))
+	# pg.display.update()
 			
 
-	clock.tick(FPS)
+	# clock.tick(FPS)
